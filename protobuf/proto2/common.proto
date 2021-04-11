@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "proto2/common";
+
+message Request {
+    uint32 req_id = 1;
+}
+
+message Response {
+    uint32 code = 1;
+    string msg = 2;
+    string data = 3;
+}

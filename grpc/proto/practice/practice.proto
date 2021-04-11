@@ -1,0 +1,51 @@
+syntax = "proto3";
+
+package practice.srv;
+
+option go_package = "proto/practice";
+
+service Practice {
+    // 服务端推送
+    rpc MsgNotice (MsgNoticeRequest) returns (stream MsgNoticeResponse) {
+    }
+    // 上传文件
+    rpc UploadFile (stream UploadFileRequest) returns (UploadFileResponse) {
+    }
+    // 简易聊天
+    rpc SimpleChat (stream ChatMsg) returns (stream ChatMsg) {
+    }
+}
+
+message MsgNoticeRequest {
+    uint32 uid = 1;
+    string latest_time = 2; // 客户端最新时间
+}
+
+message MsgNoticeResponse {
+    string title = 1;
+    string desc = 2;
+}
+
+message UploadFileRequest {
+    string name = 1; // 姓名
+    string phone = 2; // 手机
+    string work = 3; // 职位
+}
+
+message UploadFileResponse {
+    string file_name = 1; // 文件名称
+    int32 file_size = 2; // 上传的文件大小
+    int32 elapsed_time = 3; // 耗时
+}
+
+//message UploadFileRequest {
+//    string file_name = 1;
+//    stream FileData = 2;
+//}
+
+message ChatMsg {
+    uint32 id = 1;
+    uint32 uid = 2;
+    string msg = 3;
+}
+
